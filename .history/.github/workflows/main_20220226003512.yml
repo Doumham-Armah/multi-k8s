@@ -79,15 +79,19 @@ jobs:
         oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.me-jeddah-1.aaaaaaaadiktzwqydhntyfarf67ltbx47thyeouaflefgbnqncgdujiqhrna --file $HOME/.kube/config --region me-jeddah-1 --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT
         export KUBECONFIG=$HOME/.kube/config
 
+    - name: 'Deploy the API on OKE'
+      run: |
+        kubectl create -f ./k8s
+
     - name: update deployment config files
       run: |
         kubectl set image deployments/server-deployment server=mahmoudhamra/multi-server:$(git rev-parse HEAD)
         kubectl set image deployments/client-deployment server=mahmoudhamra/multi-client:$(git rev-parse HEAD)
         kubectl set image deployments/worker-deployment server=mahmoudhamra/multi-worker:$(git rev-parse HEAD)
 
-    - name: 'Deploy the API on OKE'
-      run: |
-        kubectl create -f ./k8s
+
+
+
 
 
 

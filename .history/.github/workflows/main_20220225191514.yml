@@ -64,19 +64,6 @@ jobs:
 
 
     - name: push client image to DockerHub
-      run: |
-        docker push -t mahmoudhamra/multi-client:latest
-        docker push -t mahmoudhamra/multi-client:$(git rev-parse HEAD)
-
-    - name: push server image to DockerHub
-      run: |
-        docker push -t mahmoudhamra/multi-server:latest
-        docker push -t mahmoudhamra/multi-server:$(git rev-parse HEAD)
-
-    - name: push worker image to DockerHub
-      run: |
-        docker push -t mahmoudhamra/multi-worker:latest
-        docker push -t mahmoudhamra/multi-worker:$(git rev-parse HEAD)
 
 
 

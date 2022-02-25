@@ -54,43 +54,5 @@ jobs:
     - name: Build the worker image
       run: docker build -t mahmoudhamra/multi-worker:latest -f -t mahmoudhamra/multi-client:$(git rev-parse HEAD) ./worker/Dockerfile 
 
-
-
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-
-    - name: push client image to DockerHub
-      run: |
-        docker push -t mahmoudhamra/multi-client:latest
-        docker push -t mahmoudhamra/multi-client:$(git rev-parse HEAD)
-
-    - name: push server image to DockerHub
-      run: |
-        docker push -t mahmoudhamra/multi-server:latest
-        docker push -t mahmoudhamra/multi-server:$(git rev-parse HEAD)
-
-    - name: push worker image to DockerHub
-      run: |
-        docker push -t mahmoudhamra/multi-worker:latest
-        docker push -t mahmoudhamra/multi-worker:$(git rev-parse HEAD)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # - name: Login to DockerHub Registry
-    #   run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin

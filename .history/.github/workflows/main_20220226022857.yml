@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 # env:
-  # SHA: $(git rev-parse HEAD)
+#   SHA: $(git rev-parse HEAD)
 
 jobs:
 
@@ -60,7 +60,7 @@ jobs:
         docker push mahmoudhamra/multi-worker:$(git rev-parse HEAD)
 
 
-    - name: Install OCI CLI
+    - name: 'Install OCI CLI
       run: |
         mkdir ~/.oci
         echo "${{ secrets.OCI_CONFIG }}" > ~/.oci/config
@@ -68,8 +68,10 @@ jobs:
         curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
         chmod +x install.sh
         ./install.sh --accept-all-defaults
-        echo "::add-path::/home/runner/bin"
+        echo "/home/runner/bin" >> $GITHUB_PATH
         exec -l $SHELL
+        # oci setup repair-file-permissions --file /home/runner/.oci/config
+        # oci setup repair-file-permissions --file /home/runner/.oci/key.pem
           
     - name: Fix Config File Permissions
       run: |

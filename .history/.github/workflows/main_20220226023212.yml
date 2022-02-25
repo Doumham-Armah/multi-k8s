@@ -68,7 +68,7 @@ jobs:
         curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
         chmod +x install.sh
         ./install.sh --accept-all-defaults
-        echo "::add-path::/home/runner/bin"
+        echo "/home/runner/bin" >> $GITHUB_PATH
         exec -l $SHELL
           
     - name: Fix Config File Permissions
@@ -78,7 +78,7 @@ jobs:
 
     - name: Download the KUBECONFIG
       run: |
-        mkdir -p $HOME/.kube
+        mkdir ~/.kube
         oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.me-jeddah-1.aaaaaaaadiktzwqydhntyfarf67ltbx47thyeouaflefgbnqncgdujiqhrna --file $HOME/.kube/config --region me-jeddah-1 --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT
         export KUBECONFIG=$HOME/.kube/config
 

@@ -48,9 +48,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: echo SHA
-      run: echo "$(git rev-parse HEAD)"
-
     - name: Build the client image
       run: docker build -t mahmoudhamra/multi-client:latest -t mahmoudhamra/multi-client:$(git rev-parse HEAD) -f ./client/Dockerfile ./client
     - name: Build the server image

@@ -60,13 +60,6 @@ jobs:
         docker push mahmoudhamra/multi-worker:$(git rev-parse HEAD)
 
 
-    - name: update deployment config files
-      run: |
-        kubectl set image deployments/server-deployment server=mahmoudhamra/multi-server:$(git rev-parse HEAD)
-        kubectl set image deployments/client-deployment server=mahmoudhamra/multi-client:$(git rev-parse HEAD)
-        kubectl set image deployments/worker-deployment server=mahmoudhamra/multi-worker:$(git rev-parse HEAD)
-
-
 
 
 
